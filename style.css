@@ -1,0 +1,163 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f1f1f1;
+  background: linear-gradient(45deg, rgb(59, 50, 50), rgb(22, 28, 29));
+  height: 100vh;
+}
+
+/* STRUCTURE DE L'APPLICATION */
+.container {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  border: 1px solid white;
+  background: linear-gradient(
+    to bottom left,
+    rgb(250, 99, 230),
+    rgb(36, 105, 216)
+  );
+  margin: 100px auto 0;
+  /* mise ne place de la grille dans le container */
+  display: grid;
+  /* Division des 4 lignes - division des 8 colonnes */
+  grid-template: 100px 300px 100px 100px / repeat(8, 100px);
+
+  /* BOUTS DE CODE REMPLACES AVEC INTRODUCTION DE GRID */
+  /* text-align: center; */
+  /* padding: center; */
+}
+h1 {
+  /* Sélection grid = PREMIERE LIGNE - PREMIERE COLONE - DERNIERE LIGNE - DERNIERE COLONNE */
+  grid-area: 1 / 1 / 2 / -1;
+  /* Utilisation de flexbox pour centrer le texte */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid white;
+
+  /* BOUTS DE CODE REMPLACES AVEC INTRODUCTION DE GRID */
+  /* margin: 30px auto;
+  border: none; */
+}
+
+.bloc-logo-info {
+  grid-area: 2/1/3/-1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid white;
+
+  /* BOUTS DE CODE REMPLACES AVEC INTRODUCTION DE GRID */
+  /* border-right: none; */
+  /* position: relative; */
+  /* border-left: none; */
+  /* height: 50%; */
+}
+
+.bloc-logo {
+  width: 50%;
+
+  /* position: absolute; */
+  /* top: 0px; */
+  /* left: 0px; */
+  /* display: inline-block; */
+  /* text-align: center; */
+  /* height: 100%; */
+  /* padding-top: 100px; */
+}
+
+.bloc-logo img {
+  width: 100%;
+  height: auto;
+
+  /* BOUTS DE CODE REMPLACES AVEC INTRODUCTION DE GRID */
+  /* transform: scale(coef multi width, coef multi height) */
+  /* transform: scale(4, 4); */
+}
+
+.bloc-info {
+  width: 50%;
+
+  /* BOUTS DE CODE REMPLACES AVEC INTRODUCTION DE GRID */
+  /* position: absolute; */
+  /* top: 0px; */
+  /* right: 0px; */
+  /* display: inline-block; */
+  /* text-align: left; */
+  /* height: 100%; */
+  /* padding-top: 75px; */
+}
+
+.temps,
+.localisation {
+  font-size: 250%;
+}
+
+.temps::first-letter {
+  text-transform: capitalize;
+}
+
+.temperature {
+  font-size: 375%;
+}
+
+.localisation {
+  /* NEW CODE Si texte trop long, passage à la ligne suivante */
+  word-wrap: break-word;
+}
+
+.bloc-heures-previsions {
+  grid-area: 3/1/4/-1;
+  border-bottom: 1px solid white;
+
+  /* BOUTS DE CODE REMPLACES AVEC INTRODUCTION DE GRID */
+  /* width: 100%; */
+  /* height: 100px; */
+  /* border: 1px solid white; */
+  /* border-right: none; */
+  /* border-left: none; */
+}
+
+.bloc-semaine-prevision {
+  grid-area: 4/1/5/-1;
+
+  /* BOUTS DE CODE REMPLACES AVEC INTRODUCTION DE GRID */
+  /* width: 100%; */
+  /* height: 100px; */
+}
+
+.bloc-heures-previsions,
+.bloc-semaine-prevision {
+  display: grid;
+  grid-template: 100px / repeat(7, 1fr);
+}
+
+.bloc-3heures,
+.bloc-semaine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  /* BOUTS DE CODE REMPLACES AVEC INTRODUCTION DE GRID */
+  /* display: inline-block; */
+  /* padding-top: 30px; */
+}
+
+.bloc-3heures:not(:last-child),
+.bloc-semaine:not(:last-child) {
+  border-right: 1px solid white;
+}
+
+.bloc-3heures p,
+.bloc-semaine p {
+  margin: 5px;
+}
