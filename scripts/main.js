@@ -1,4 +1,5 @@
 "use strict";
+import tabJoursEnOrdre from "./Utilitaire/gestionTemps.js";
 
 const CLEFAPI = "5a4d1dc7eddf122e682dc9258075fc54";
 // variable qui recevra les requêtes météo liées à la géolocalisation
