@@ -1,5 +1,7 @@
-"use strict"
+"use strict";
+
 import tabJoursEnOrdre from "./Utilitaire/gestionTemps.js";
+console.log(tabJoursEnOrdre);
 
 const CLEFAPI = "5a4d1dc7eddf122e682dc9258075fc54";
 // variable qui recevra les requêtes météo liées à la géolocalisation
@@ -10,8 +12,9 @@ const localisation = document.querySelector(".localisation");
 const heure = document.querySelectorAll(".ligneDesHeures");
 const tempPourH = document.querySelectorAll(".ligneDesTemperatures");
 const joursSuiv = document.querySelectorAll(".ligneDesJours");
-const tempPourJ = document.querySelectorAll('.ligneDesTemperaturesJours');
-const imgIcone = document.querySelector('.logo-meteo');
+const tempPourJ = document.querySelectorAll(".ligneDesTemperaturesJours");
+const imgIcone = document.querySelector(".logo-meteo");
+const chargementContainer = document.querySelector(".overlay-icone-chargement");
 
 // GEOLOCALISATION - CAPTATION DES DONNEES ET ENVOI A L'API DES DONNEES RECUEILLIES
 if (navigator.geolocation) {
@@ -77,22 +80,24 @@ function AppelAPI(long, lat) {
 
       for (let i = 0; i < tabJoursEnOrdre.length; i++) {
         joursSuiv[i].innerText = tabJoursEnOrdre[i].slice(0, 3);
-      };
+      }
 
       // intégration des températures jours semaine
 
-      for(let i = 0; i < tempPourJ.length; i++) {
-      tempPourJ[i].innerText = `${Math.trunc(resultatsAPI.daily[i + 1].temp.day)}°`;
-      } 
+      for (let i = 0; i < 7; i++) {
+        tempPourJ[i].innerText = `${Math.trunc(
+          resultatsAPI.daily[i + 1].temp.day
+        )}°`;
+      }
       // main.js:79 Uncaught (in promise) TypeError: Cannot set property 'innerText' of undefined
-      // at main.js:79
+      // at main.js:79 = ok trouvé ! 2 x mercredi dans variable jousDeLaSemaine !!!!
 
       // Intégration de l'icone dynamique
       if (heureActuelle >= 6 && heureActuelle < 21) {
-        imgIcone.src=`ressources/jour/${resultatsAPI.current.weather[0].icon}.svg`
+        imgIcone.src = `ressources/jour/${resultatsAPI.current.weather[0].icon}.svg`;
       } else {
-        imgIcone.src=`ressources/nuit/${resultatsAPI.current.weather[0].icon}.svg`
+        imgIcone.src = `ressources/nuit/${resultatsAPI.current.weather[0].icon}.svg`;
       }
-
+      chargementContainer.classList.add("disparition");
     });
 }
