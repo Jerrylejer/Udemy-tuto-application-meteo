@@ -1,5 +1,7 @@
 "use strict";
+
 import tabJoursEnOrdre from "./Utilitaire/gestionTemps.js";
+console.log(tabJoursEnOrdre);
 
 const CLEFAPI = "5a4d1dc7eddf122e682dc9258075fc54";
 // variable qui recevra les requêtes météo liées à la géolocalisation
@@ -7,9 +9,12 @@ let resultatsAPI;
 const temps = document.querySelector(".temps");
 const temperature = document.querySelector(".temperature");
 const localisation = document.querySelector(".localisation");
-const heure = document.querySelectorAll(".ligneDesheures");
-const tempPourH = document.querySelectorAll(".ligneDestemperatures");
-const jour = document.querySelector(".ligne2temperatures");
+const heure = document.querySelectorAll(".ligneDesHeures");
+const tempPourH = document.querySelectorAll(".ligneDesTemperatures");
+const joursSuiv = document.querySelectorAll(".ligneDesJours");
+const tempPourJ = document.querySelectorAll(".ligneDesTemperaturesJours");
+const imgIcone = document.querySelector(".logo-meteo");
+const chargementContainer = document.querySelector(".overlay-icone-chargement");
 
 // GEOLOCALISATION - CAPTATION DES DONNEES ET ENVOI A L'API DES DONNEES RECUEILLIES
 if (navigator.geolocation) {
@@ -39,7 +44,7 @@ function AppelAPI(long, lat) {
     .then((reponse) => {
       return reponse.json();
     })
-    // Puis les datas sont introduites dans le DOM
+    // PUIS INTEGREES DANS LE DOM
     .then((data) => {
       // INTEGRATION DES DONNEES DANS LE BLOC INFOS
       console.log(data);
@@ -63,12 +68,36 @@ function AppelAPI(long, lat) {
           heure[i].innerText = `${heureSuiv} h`;
         }
       }
-      //   intégration des températures suivant l'ordre des heures
+      // intégration des températures suivant l'ordre des heures
 
       for (let i = 0; i < tempPourH.length; i++) {
         tempPourH[i].innerText = `${Math.trunc(
           resultatsAPI.hourly[i * 3].temp
         )}°`;
       }
+
+      // intégration des jours de la semaine - 3 premières lettres
+
+      for (let i = 0; i < tabJoursEnOrdre.length; i++) {
+        joursSuiv[i].innerText = tabJoursEnOrdre[i].slice(0, 3);
+      }
+
+      // intégration des températures jours semaine
+
+      for (let i = 0; i < 7; i++) {
+        tempPourJ[i].innerText = `${Math.trunc(
+          resultatsAPI.daily[i + 1].temp.day
+        )}°`;
+      }
+      // main.js:79 Uncaught (in promise) TypeError: Cannot set property 'innerText' of undefined
+      // at main.js:79 = ok trouvé ! 2 x mercredi dans variable jousDeLaSemaine !!!!
+
+      // Intégration de l'icone dynamique
+      if (heureActuelle >= 6 && heureActuelle < 21) {
+        imgIcone.src = `ressources/jour/${resultatsAPI.current.weather[0].icon}.svg`;
+      } else {
+        imgIcone.src = `ressources/nuit/${resultatsAPI.current.weather[0].icon}.svg`;
+      }
+      chargementContainer.classList.add("disparition");
     });
 }

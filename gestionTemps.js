@@ -4,7 +4,7 @@
 // Afin que les jours soient raccords avec la réalité de l'internaute, il faut développer en JS
 
 
-const joursDeLaSemaine = ['Lundi', 'Mardi', 'Mercredi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+const joursDeLaSemaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 let ajd = new Date();
 let options = {weekday: 'long'};
 // Méthode toLocalDateString() qui transpose ajd en français
@@ -21,7 +21,6 @@ let tabJoursEnOrdre = joursDeLaSemaine.slice(joursDeLaSemaine.indexOf(jourActuel
 // mon tableau est égale à tabJoursEnOrdre = ['Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 // .concat(joursDeLaSemaine.slice(0, joursDeLaSemaine.indexOf(jourActuel) = je concate à tabJoursEnOrdre un autre bout de joursDeLaSemaine (partant de l'index 0 = 'Lundi', à l'index de joursDeLaSemaine déterminé par jourActuel, càd 'Mardi', ce dernier est exclue avec la méthode slice)
 // A ce stade mon tableau est égale à tabJoursEnOrdre = ['Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche', 'Lundi']
-console.log(tabJoursEnOrdre);
 // LE TABLEAU EST CREE, IL FONCTIONNE (LE JOUR CHANGE AUTOMATIQUEMENT), 
 
 // IMPORTATION DANS LE FICHIER MAIN.JS
